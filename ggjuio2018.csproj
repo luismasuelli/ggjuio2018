@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.3.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -321,6 +323,7 @@
     <Compile Include="Assets\Scripts\WindRose\Behaviors\Objects\Positionable.cs" />
     <Compile Include="Assets\Scripts\WindRose\Behaviors\Objects\Represented.cs" />
     <Compile Include="Assets\Scripts\WindRose\Behaviors\Objects\Snapped.cs" />
+    <Compile Include="Assets\Scripts\WindRose\Behaviors\Objects\Sorted.cs" />
     <Compile Include="Assets\Scripts\WindRose\Behaviors\Objects\TriggerEnabled.cs" />
     <Compile Include="Assets\Scripts\WindRose\Behaviors\Objects\TriggerReceiver.cs" />
     <Compile Include="Assets\Scripts\WindRose\Behaviors\Objects\TriggerSender.cs" />
