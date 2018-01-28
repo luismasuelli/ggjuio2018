@@ -55,10 +55,6 @@ namespace WindRose
                 // We order the sprite
                 int sortingOffset = (int)(positionable.ParentMap.Width + positionable.ParentMap.Height) * ((int)(subLayer));
                 spriteRenderer.sortingOrder = sortingOffset + (int)(positionable.Yf * positionable.ParentMap.Width + positionable.Xf);
-                // And also set the current animation.
-                //   We are sure this animation will be non-empty.
-                currentAnimation.Thick();
-                spriteRenderer.sprite = currentAnimation.CurrentSprite;
             }
 
             void Pause(bool fullFreeze)
