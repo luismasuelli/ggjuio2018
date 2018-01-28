@@ -20,7 +20,8 @@ public class ShockwaveScript : MonoBehaviour {
                 transform.localScale = new Vector3( 0.01f, 0.01f, 0.01f );
             }
             else {
-                Destroy( this );
+                //Destroy( this );
+                gameObject.SetActive( false );
             }
         }
 		
