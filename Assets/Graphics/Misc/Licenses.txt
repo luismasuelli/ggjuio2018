@@ -1,0 +1,3 @@
+Explosion03.png
+  sourced from: Soluna Software, https://opengameart.org/content/explosion-effects-and-more
+  License type: CC-BY 30 (see Licenses/CCBY30.txt for more details)
