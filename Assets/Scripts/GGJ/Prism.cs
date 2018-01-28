@@ -16,22 +16,39 @@ public class Prism : MonoBehaviour {
     }
 
     public void Rotate() {
-        float directionMultiplier = 1.0f;
-        this.transform.RotateAround( rotatePivot.transform.position, -Vector3.forward, directionMultiplier * 90.0f );
+        //float directionMultiplier = 1.0f;
+        //this.transform.RotateAround( rotatePivot.transform.position, -Vector3.forward, directionMultiplier * 90.0f );
+        StartCoroutine( RotateAnimated() );
     }
 
     public IEnumerator RotateAnimated() {
 
         float directionMultiplier = 1.0f;
+        float rotationDuration = 0.25f;
         float elapsedTime = 0.0f;
-        while( elapsedTime <= rotationDuration ) {
-            //Debug.Log("Rotation forward");
-            //this.transform.Rotate( 0, 0, 90.0f );
-            this.transform.RotateAround( rotatePivot.transform.position, -Vector3.forward, directionMultiplier * 90.0f );
+
+        Quaternion initialAngle = this.transform.rotation;
+        Vector3 initialPosition = this.transform.position;
+
+        this.transform.RotateAround( rotatePivot.transform.position, -Vector3.forward, directionMultiplier * 90.0f );
+
+        Quaternion finalAngle = this.transform.rotation;
+        Vector3 finalPosition = this.transform.position;
+
+        this.transform.rotation = initialAngle;
+        this.transform.position = initialPosition;
+
+        float rotationDurationBck = rotationDuration;
+
+        while( elapsedTime <= rotationDurationBck ) {
+
+            this.transform.RotateAround( rotatePivot.transform.position, -Vector3.forward, directionMultiplier * 90.0f * Time.deltaTime / rotationDuration );
 
             elapsedTime += Time.deltaTime;
 
             yield return null;
         }
+        this.transform.rotation = finalAngle;
+        this.transform.position = finalPosition;
     }
 }
