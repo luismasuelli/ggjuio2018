@@ -7,6 +7,7 @@ public class FlyingParticle : MonoBehaviour {
     private Rigidbody2D rigidBody2D;
     public Direction? Movement = Direction.DOWN;
     public ParticleSystem particleTrail;
+    private bool bouncing;
 
     private const float SPEED = 8f;
 
@@ -46,7 +47,27 @@ public class FlyingParticle : MonoBehaviour {
                 speed = Vector2.zero;
                 break;
         }
+        Debug.Log(speed);
         rigidBody2D.MovePosition((Vector2)transform.position + speed * Time.deltaTime);
+    }
+
+    private void Bounce(Direction direction)
+    {
+        Debug.Log(string.Format("Bouncing from direction {0} to direction {1}", Movement, direction));
+        bouncing = true;
+        Movement = direction;
+    }
+
+    private void HitMirrorBadly(CapsulesHandler handler)
+    {
+        Debug.Log(string.Format("Crashing with direction {0}", Movement));
+        if (!bouncing) handler.Crashed();
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        Debug.Log("Leaving bounce");
+        bouncing = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -57,24 +78,22 @@ public class FlyingParticle : MonoBehaviour {
 
         if (mirror != null)
         {
-            Debug.Log("Mirror looking at: " + mirror.orientation);
-            Debug.Log("Movement of particle: " + Movement);
             switch (mirror.orientation)
             {
                 case Mirror.Orientation.LEFT_DOWN:
                     switch(Movement)
                     {
                         case Direction.UP:
-                            handler.Crashed();
+                            HitMirrorBadly(handler);
                             break;
                         case Direction.RIGHT:
-                            handler.Crashed();
+                            HitMirrorBadly(handler);
                             break;
                         case Direction.LEFT:
-                            Movement = Direction.UP;
+                            Bounce(Direction.UP);
                             break;
                         case Direction.DOWN:
-                            Movement = Direction.RIGHT;
+                            Bounce(Direction.RIGHT);
                             break;
                     }
                     break;
@@ -82,16 +101,16 @@ public class FlyingParticle : MonoBehaviour {
                     switch (Movement)
                     {
                         case Direction.UP:
-                            Movement = Direction.RIGHT;
+                            Bounce(Direction.RIGHT);
                             break;
                         case Direction.RIGHT:
-                            handler.Crashed();
+                            HitMirrorBadly(handler);
                             break;
                         case Direction.LEFT:
-                            Movement = Direction.DOWN;
+                            Bounce(Direction.DOWN);
                             break;
                         case Direction.DOWN:
-                            handler.Crashed();
+                            HitMirrorBadly(handler);
                             break;
                     }
                     break;
@@ -99,16 +118,16 @@ public class FlyingParticle : MonoBehaviour {
                     switch (Movement)
                     {
                         case Direction.UP:
-                            Movement = Direction.LEFT;
+                            Bounce(Direction.LEFT);
                             break;
                         case Direction.RIGHT:
-                            Movement = Direction.DOWN;
+                            Bounce(Direction.DOWN);
                             break;
                         case Direction.LEFT:
-                            handler.Crashed();
+                            HitMirrorBadly(handler);
                             break;
                         case Direction.DOWN:
-                            handler.Crashed();
+                            HitMirrorBadly(handler);
                             break;
                     }
                     break;
@@ -116,16 +135,16 @@ public class FlyingParticle : MonoBehaviour {
                     switch (Movement)
                     {
                         case Direction.UP:
-                            handler.Crashed();
+                            HitMirrorBadly(handler);
                             break;
                         case Direction.RIGHT:
-                            Movement = Direction.UP;
+                            Bounce(Direction.UP);
                             break;
                         case Direction.LEFT:
-                            handler.Crashed();
+                            HitMirrorBadly(handler);
                             break;
                         case Direction.DOWN:
-                            Movement = Direction.LEFT;
+                            Bounce(Direction.LEFT);
                             break;
                     }
                     break;
