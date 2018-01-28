@@ -291,6 +291,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CamJam\Behaviours\StalkerEye.cs" />
+    <Compile Include="Assets\Scripts\CapsulesHandler.cs" />
     <Compile Include="Assets\Scripts\GabTab\Behaviours\Hideable.cs" />
     <Compile Include="Assets\Scripts\GabTab\Behaviours\InteractiveInterface.cs" />
     <Compile Include="Assets\Scripts\GabTab\Behaviours\InteractiveMessage.cs" />
@@ -307,6 +308,7 @@
     <Compile Include="Assets\Scripts\GabTab\Types\WaitForQuickOrSlowSecondsRealtime.cs" />
     <Compile Include="Assets\Scripts\KeyboardHandled.cs" />
     <Compile Include="Assets\Scripts\SoundAround\Behaviours\AudioLoop.cs" />
+    <Compile Include="Assets\Scripts\StartingCapsule.cs" />
     <Compile Include="Assets\Scripts\Support\Types\Exception.cs" />
     <Compile Include="Assets\Scripts\Support\Types\OrderedSet.cs" />
     <Compile Include="Assets\Scripts\Support\Types\SerializableDictionary.cs" />
