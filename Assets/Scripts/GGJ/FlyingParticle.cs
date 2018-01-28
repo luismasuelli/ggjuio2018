@@ -51,13 +51,15 @@ public class FlyingParticle : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Mirror mirror = collision.gameObject.GetComponent<Mirror>();
+        Mirror mirror = collision.gameObject.GetComponentInParent<Mirror>();
         Capsule capsule = collision.gameObject.GetComponent<Capsule>();
         CapsulesHandler handler = GetComponentInParent<CapsulesHandler>();
 
         if (mirror != null)
         {
-            switch(mirror.orientation)
+            Debug.Log("Mirror looking at: " + mirror.orientation);
+            Debug.Log("Movement of particle: " + Movement);
+            switch (mirror.orientation)
             {
                 case Mirror.Orientation.LEFT_DOWN:
                     switch(Movement)

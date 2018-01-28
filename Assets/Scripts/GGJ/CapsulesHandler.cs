@@ -1,11 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using WindRose.Types;
-using WindRose.Behaviours.UI;
+using WindRose.Behaviours;
 using GabTab.Behaviours;
 using GabTab.Behaviours.Interactors;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
 public class CapsulesHandler : MonoBehaviour {
@@ -15,9 +14,11 @@ public class CapsulesHandler : MonoBehaviour {
     public Capsule StartingCapsule;
     private bool finalReached = false;
     [SerializeField]
-    private string sceneName;
+    private string nextSceneName;
     [SerializeField]
     private InteractiveInterface interactiveInterface;
+    [SerializeField]
+    private KeyboardHandled doctor;
 
     [SerializeField]
     private AudioSource shooting;
@@ -40,6 +41,7 @@ public class CapsulesHandler : MonoBehaviour {
     {
         animator.SetBool("Pressed", true);
         teleporting.Play();
+        doctor.enabled = false;
     }
 
     private void PrepareParticle() {
@@ -71,6 +73,7 @@ public class CapsulesHandler : MonoBehaviour {
     public void Crashed()
     {
         animator.SetBool("Crashed", true);
+        doctor.oriented.orientation = Direction.DOWN;
         interactiveInterface.RunInteraction(Swear);
         flyingParticle.particleTrail.Stop();
         crashing.Play();
@@ -78,9 +81,18 @@ public class CapsulesHandler : MonoBehaviour {
 
     private IEnumerator Swear(InteractorsManager manager, InteractiveMessage message)
     {
-        // TODO: Lanzamos una mega puteada, la cual usa un interactor de dos botones (reiniciar nivel, reiniciar juego)
-        //   para que, entonces, el nivel (o el juego) se reinicien.
-        yield break;
+        ButtonsInteractor restartInteractor = (ButtonsInteractor)manager["restart"];
+        yield return restartInteractor.RunInteraction(message, new InteractiveMessage.PromptBuilder().Clear().Write("Coooo#$%^&*o!").Wait(0.5f).End());
+        if (restartInteractor.Result == "current")
+        {
+            // reinicia el nivel.
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        }
+        else
+        {
+            // reinicia el juego.
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
+        }
     }
 
     public void Reached()
@@ -92,6 +104,7 @@ public class CapsulesHandler : MonoBehaviour {
 
     public void Landed()
     {
+        doctor.oriented.orientation = Direction.DOWN;
         animator.SetBool("Landed", true);
         interactiveInterface.RunInteraction(Yay);
         happyMonkey.Play();
@@ -102,5 +115,6 @@ public class CapsulesHandler : MonoBehaviour {
         NullInteractor dummyInteractor = (NullInteractor)manager["null"];
         ButtonsInteractor continueInteractor = (ButtonsInteractor)manager["continue"];
         yield return continueInteractor.RunInteraction( message, new InteractiveMessage.PromptBuilder().Clear().Write( "Siiiiii funciono!" ).Wait( 0.5f ).End() );
+        SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Single);
     }
 }

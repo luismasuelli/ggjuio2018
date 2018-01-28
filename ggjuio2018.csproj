@@ -310,6 +310,7 @@
     <Compile Include="Assets\Scripts\GGJ\CapsulesHandler.cs" />
     <Compile Include="Assets\Scripts\GGJ\FlyingParticle.cs" />
     <Compile Include="Assets\Scripts\GGJ\KeyboardHandled.cs" />
+    <Compile Include="Assets\Scripts\GGJ\MirrorButton.cs" />
     <Compile Include="Assets\Scripts\GGJ\Mirror.cs" />
     <Compile Include="Assets\Scripts\GGJ\Prism.cs" />
     <Compile Include="Assets\Scripts\GGJ\WelcomeMessage.cs" />

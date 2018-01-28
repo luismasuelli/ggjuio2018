@@ -5,8 +5,8 @@ using WindRose.Types;
 [RequireComponent(typeof(Movable))]
 public class KeyboardHandled : MonoBehaviour {
 
-    private Positionable positionable;
-    private Oriented oriented;
+    public Positionable positionable;
+    public Oriented oriented;
 
 	// Use this for initialization
 	void Start () {
