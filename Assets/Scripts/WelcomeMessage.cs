@@ -15,7 +15,7 @@ public class WelcomeMessage : MonoBehaviour {
 	IEnumerator Start()
     {
         yield return new WaitForSeconds(0.5f);
-        GetComponent<InteractiveInterface>().RunInteraction(WelcomeRoutine);
+        // GetComponent<InteractiveInterface>().RunInteraction(WelcomeRoutine);
 	}
 
     IEnumerator WelcomeRoutine(InteractorsManager manager, InteractiveMessage message)

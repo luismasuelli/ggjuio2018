@@ -27,10 +27,29 @@ public class CapsulesHandler : MonoBehaviour {
         animator.SetBool("Pressed", true);
     }
 
+    private void PrepareParticle() {
+        FlyingParticle flyingParticle = GetComponentInChildren<FlyingParticle>(true);
+
+        flyingParticle.Movement = StartingDirection;
+        switch( StartingDirection ) {
+            case Direction.DOWN:
+                flyingParticle.transform.position = (Vector2)StartingCapsule.transform.position + new Vector2( 0.5f, -1.25f );
+                break;
+            case Direction.UP:
+                flyingParticle.transform.position = (Vector2)StartingCapsule.transform.position + new Vector2( 0.5f, 0.25f );
+                break;
+            case Direction.LEFT:
+                flyingParticle.transform.position = (Vector2)StartingCapsule.transform.position + new Vector2( -0.25f, -0.5f );
+                break;
+            case Direction.RIGHT:
+                flyingParticle.transform.position = (Vector2)StartingCapsule.transform.position + new Vector2( 1.25f, -0.5f );
+                break;
+        }
+    }
+
     public void Launched()
     {
-        // TODO: Acomodamos la particula para lanzarla
-        // TODO: Tenemos en cuenta la direccion de inicio y la capsula de comienzo
+        PrepareParticle();
         animator.SetBool("Launched", true);
     }
 
@@ -64,8 +83,8 @@ public class CapsulesHandler : MonoBehaviour {
 
     private IEnumerator Yay(InteractorsManager manager, InteractiveMessage message)
     {
-        // TODO: Lanzamos un mensaje de exito, el cual usa un interactor de continuar, para avanzar al proximo nivel
-        //   o para ganar el juego.
-        yield break;
+        NullInteractor dummyInteractor = (NullInteractor)manager["null"];
+        ButtonsInteractor continueInteractor = (ButtonsInteractor)manager["continue"];
+        yield return dummyInteractor.RunInteraction( message, new InteractiveMessage.PromptBuilder().Write( "Siiiiii funciono!" ).Wait( 0.5f ).End() );
     }
 }
