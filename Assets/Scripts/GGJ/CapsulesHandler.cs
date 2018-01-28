@@ -8,28 +8,41 @@ using GabTab.Behaviours.Interactors;
 using UnityEditor.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(MapInteractiveInterface))]
 public class CapsulesHandler : MonoBehaviour {
     private Animator animator;
-    private InteractiveInterface interactiveInterface;
+    private FlyingParticle flyingParticle;
     public Direction StartingDirection = Direction.DOWN;
     public Capsule StartingCapsule;
+    private bool finalReached = false;
     [SerializeField]
-    private string sceneName; 
+    private string sceneName;
+    [SerializeField]
+    private InteractiveInterface interactiveInterface;
+
+    [SerializeField]
+    private AudioSource shooting;
+    [SerializeField]
+    private AudioSource teleporting;
+    [SerializeField]
+    private AudioSource crashing;
+    [SerializeField]
+    private AudioSource happyMonkey;
+    [SerializeField]
+    private AudioSource bouncing;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        flyingParticle = GetComponentInChildren<FlyingParticle>(true);
     }
 
     public void ButtonPressed()
     {
         animator.SetBool("Pressed", true);
+        teleporting.Play();
     }
 
     private void PrepareParticle() {
-        FlyingParticle flyingParticle = GetComponentInChildren<FlyingParticle>(true);
-
         flyingParticle.Movement = StartingDirection;
         switch( StartingDirection ) {
             case Direction.DOWN:
@@ -51,12 +64,16 @@ public class CapsulesHandler : MonoBehaviour {
     {
         PrepareParticle();
         animator.SetBool("Launched", true);
+        flyingParticle.particleTrail.Play();
+        shooting.Play();
     }
 
     public void Crashed()
     {
         animator.SetBool("Crashed", true);
         interactiveInterface.RunInteraction(Swear);
+        flyingParticle.particleTrail.Stop();
+        crashing.Play();
     }
 
     private IEnumerator Swear(InteractorsManager manager, InteractiveMessage message)
@@ -69,22 +86,21 @@ public class CapsulesHandler : MonoBehaviour {
     public void Reached()
     {
         animator.SetBool("Reached", true);
+        flyingParticle.particleTrail.Stop();
+        teleporting.Play();
     }
 
     public void Landed()
     {
         animator.SetBool("Landed", true);
-    }
-
-    public void Final()
-    {
         interactiveInterface.RunInteraction(Yay);
+        happyMonkey.Play();
     }
 
     private IEnumerator Yay(InteractorsManager manager, InteractiveMessage message)
     {
         NullInteractor dummyInteractor = (NullInteractor)manager["null"];
         ButtonsInteractor continueInteractor = (ButtonsInteractor)manager["continue"];
-        yield return dummyInteractor.RunInteraction( message, new InteractiveMessage.PromptBuilder().Write( "Siiiiii funciono!" ).Wait( 0.5f ).End() );
+        yield return continueInteractor.RunInteraction( message, new InteractiveMessage.PromptBuilder().Clear().Write( "Siiiiii funciono!" ).Wait( 0.5f ).End() );
     }
 }

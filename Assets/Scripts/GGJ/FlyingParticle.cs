@@ -6,16 +6,27 @@ using WindRose.Types;
 public class FlyingParticle : MonoBehaviour {
     private Rigidbody2D rigidBody2D;
     public Direction? Movement = Direction.DOWN;
+    public ParticleSystem particleTrail;
 
-    private const float SPEED = 4f;
+    private const float SPEED = 8f;
 
+    private void MakeTrailFollowMe()
+    {
+        if (particleTrail != null)
+        {
+            particleTrail.transform.position = new Vector3(transform.position.x, transform.position.y, particleTrail.transform.position.z);
+            particleTrail.transform.rotation = transform.rotation;
+        }
+    }
 	// Use this for initialization
 	void Start () {
         rigidBody2D = GetComponent<Rigidbody2D>();
-	}
+        MakeTrailFollowMe();
+    }
 	
 	// Update is called once per frame
 	void Update () {
+        MakeTrailFollowMe();
         Vector2 speed;
 		switch(Movement)
         {

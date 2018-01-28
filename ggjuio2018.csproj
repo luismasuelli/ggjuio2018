@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.3.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -289,9 +291,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CamJam\Behaviours\StalkerEye.cs" />
-    <Compile Include="Assets\Scripts\Capsule.cs" />
-    <Compile Include="Assets\Scripts\CapsulesHandler.cs" />
-    <Compile Include="Assets\Scripts\FlyingParticle.cs" />
     <Compile Include="Assets\Scripts\GabTab\Behaviours\Hideable.cs" />
     <Compile Include="Assets\Scripts\GabTab\Behaviours\InteractiveInterface.cs" />
     <Compile Include="Assets\Scripts\GabTab\Behaviours\InteractiveMessage.cs" />
@@ -307,10 +306,13 @@
     <Compile Include="Assets\Scripts\GabTab\Types\WaitForQuickOrSlowSeconds.cs" />
     <Compile Include="Assets\Scripts\GabTab\Types\WaitForQuickOrSlowSecondsRealtime.cs" />
     <Compile Include="Assets\Scripts\GGJ\ButtonTrigger.cs" />
-    <Compile Include="Assets\Scripts\GGJ\Movement.cs" />
+    <Compile Include="Assets\Scripts\GGJ\Capsule.cs" />
+    <Compile Include="Assets\Scripts\GGJ\CapsulesHandler.cs" />
+    <Compile Include="Assets\Scripts\GGJ\FlyingParticle.cs" />
+    <Compile Include="Assets\Scripts\GGJ\KeyboardHandled.cs" />
+    <Compile Include="Assets\Scripts\GGJ\Mirror.cs" />
     <Compile Include="Assets\Scripts\GGJ\Prism.cs" />
-    <Compile Include="Assets\Scripts\KeyboardHandled.cs" />
-    <Compile Include="Assets\Scripts\Mirror.cs" />
+    <Compile Include="Assets\Scripts\GGJ\WelcomeMessage.cs" />
     <Compile Include="Assets\Scripts\SoundAround\Behaviours\AudioLoop.cs" />
     <Compile Include="Assets\Scripts\Support\Types\Exception.cs" />
     <Compile Include="Assets\Scripts\Support\Types\OrderedSet.cs" />
@@ -318,7 +320,6 @@
     <Compile Include="Assets\Scripts\Support\Utils\Layout.cs" />
     <Compile Include="Assets\Scripts\Support\Utils\Textures.cs" />
     <Compile Include="Assets\Scripts\Support\Utils\Values.cs" />
-    <Compile Include="Assets\Scripts\WelcomeMessage.cs" />
     <Compile Include="Assets\Scripts\WindRose\Behaviors\Map.cs" />
     <Compile Include="Assets\Scripts\WindRose\Behaviors\MapLoader.cs" />
     <Compile Include="Assets\Scripts\WindRose\Behaviors\Objects\EventDispatcher.cs" />
@@ -349,11 +350,14 @@
     <Compile Include="Assets\Scripts\WindRose\Utils\Loaders\TilemapLayer.cs" />
     <Compile Include="Assets\Scripts\WindRose\Utils\Loaders\TilemapLoader.cs" />
     <Compile Include="Assets\Scripts\WindRose\Utils\Loaders\TilemapObjectLoader.cs" />
+    <Compile Include="Assets\VFX\CameraShake.cs" />
+    <Compile Include="Assets\VFX\ShockWaveDistortion\ShockwaveScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fonts\bitwise-license.txt" />
     <None Include="Assets\Graphics\Misc\Licenses.txt" />
     <None Include="Assets\Licenses\CCBY30.txt" />
+    <None Include="Assets\VFX\ShockWaveDistortion\WaveEffectShader.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

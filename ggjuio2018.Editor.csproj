@@ -302,6 +302,7 @@
     <None Include="Assets\Fonts\bitwise-license.txt" />
     <None Include="Assets\Graphics\Misc\Licenses.txt" />
     <None Include="Assets\Licenses\CCBY30.txt" />
+    <None Include="Assets\VFX\ShockWaveDistortion\WaveEffectShader.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
